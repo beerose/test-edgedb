@@ -1,7 +1,13 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Image from 'next/image'
+import styles from './page.module.css'
+import { createClient } from 'edgedb'
 
-export default function Home() {
+export default async function Home() {
+  const client = createClient()
+  const data = await client.query('SELECT 1 + 1')
+
+  console.log('data', data)
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -15,7 +21,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{" "}
+            By{' '}
             <Image
               src="/vercel.svg"
               alt="Vercel Logo"
@@ -91,5 +97,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  );
+  )
 }
